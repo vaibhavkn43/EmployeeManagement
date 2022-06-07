@@ -9,26 +9,31 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cdac.hcdc.EmpM.DAO.EmployeeDAOImpl;
 import com.cdac.hcdc.EmpM.DAO.EmployeeDao;
 import com.cdac.hcdc.EmpM.Model.Employee;
+import com.cdac.hcdc.EmpM.service.EmployeeService;
 
 
 @Controller
 public class EmployeeController {
 	
-	//EmployeeDao employeeDao= new EmployeeDAOImpl();
+	
+	
 	@Autowired
-	private EmployeeDao employeeDao;
+	EmployeeService employeeService;
+	
 	
 	//handler method for displaying employee list/table
 	//@RequestMapping(value = "/showEmployee" , method = RequestMethod.GET)
 	@GetMapping("/showEmployee")
 	public String showEmployeeList(Model model)
 	{
-		List<Employee> employeeList = employeeDao.loadEmployees();
+		//service call
+		List<Employee> employeeList = employeeService.loadEmployees();
 		model.addAttribute("employees", employeeList);
 		
 		return  "employee-list";
@@ -51,9 +56,21 @@ public class EmployeeController {
 	@PostMapping("/save-employee")
 	public String saveEmployee(Employee employee)
 	{
-		//do aa DAO call to save the data of employee 
+		// condition check
+		// if user having id--> its update opertaion
+		//if user dont have id its insert opertaion
 		
-		employeeDao.saveEmployee(employee);
+		if(employee.getId()==0)
+		{
+		//insert new employee or insert new record	
+			employeeService.saveEmployee(employee);
+		}
+		else
+		{
+			employeeService.updateEmployee(employee);
+		}
+		
+		//do aa Service call to save the data of employee 
 		
 		return "redirect:/showEmployee";
 	}
@@ -62,8 +79,32 @@ public class EmployeeController {
 	@GetMapping("/thankyou")
 	public String thankyou()
 	{
-		
 		return "Thank You ...Your Details Has Been Saved...";
-		
 	}
+	
+	@GetMapping("/updateEmployee")
+	public String updateEmployee(@RequestParam("userId") int id, Model model)
+	{
+		
+		Employee ebyId = employeeService.getEmployeeById(id);
+		
+		model.addAttribute("employee", ebyId);
+		return "add-employee";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

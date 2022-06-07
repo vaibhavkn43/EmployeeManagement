@@ -18,7 +18,7 @@ public class EmployeeDAOImpl implements EmployeeDao{
 
 	// connect with DB  with jdbc
 	@Autowired
-	JdbcTemplate jdbcTemplate;
+	private JdbcTemplate jdbcTemplate;
 	
 	@Override
 	public List<Employee> loadEmployees() {
@@ -42,5 +42,39 @@ public class EmployeeDAOImpl implements EmployeeDao{
 		System.out.println("1 Record Saved...");
 		
 	}
+
+	@Override
+	public Employee getEmployeeById(int id) {
+		String sql= "Select * from employees where id=?";
+		Employee employee = jdbcTemplate.queryForObject(sql, new EmployeeRowMapper(), id);
+		return employee;
+	}
+
+	@Override
+	public void updateEmployee(Employee ebyId) {
+		
+		Object[] sqlParameters={ebyId.getName() , ebyId.getMobile() , ebyId.getCountry()};
+		String sql="UPDATE  employees set name = ? , mobile = ? , country = ?";
+		jdbcTemplate.update(sql, sqlParameters);
+		
+		System.out.println("1 Record Updated...");
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

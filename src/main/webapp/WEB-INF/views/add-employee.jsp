@@ -15,7 +15,8 @@
 
 		<form:form action="save-employee" modelAttribute="employee"
 			method="POST">
-
+			
+			<form:hidden path="id" />
 			<label>Name :</label>
 			<form:input path="name" />
 			<br><br>

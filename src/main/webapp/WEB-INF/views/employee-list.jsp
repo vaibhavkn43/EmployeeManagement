@@ -26,6 +26,7 @@
 					<td><b>Mobile</b></td>
 					<td><b>Country</b></td>
 				</tr>
+				
 			</thead>
 			<c:forEach var="emp" items="${employees}">
 				<tr>
@@ -33,6 +34,7 @@
 					<td>${emp.name}</td>
 					<td>${emp.mobile}</td>
 					<td>${emp.country}</td>
+					<td><a href="/Employee-Management/updateEmployee?userId=${emp.id}">UPDATE</a></td>
 				</tr>
 			</c:forEach>
 		</table>
