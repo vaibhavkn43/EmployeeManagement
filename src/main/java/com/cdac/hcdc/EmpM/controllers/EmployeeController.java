@@ -92,9 +92,16 @@ public class EmployeeController {
 		return "add-employee";
 	}
 	
+
 	
-	
-	
+	@GetMapping("/deleteEmployee")
+	public String deleteEmployee(@RequestParam("userId") int id)
+	{
+		
+		employeeService.deleteEmployee(id);
+		
+		return "redirect:/showEmployee";
+	}
 	
 	
 	

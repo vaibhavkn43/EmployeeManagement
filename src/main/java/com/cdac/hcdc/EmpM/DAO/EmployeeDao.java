@@ -13,5 +13,6 @@ public List<Employee> loadEmployees();
 public void saveEmployee(Employee employee);
 public Employee getEmployeeById(int id);
 public void updateEmployee(Employee ebyId);
+public void deleteEmployee(Integer eId);
 
 }

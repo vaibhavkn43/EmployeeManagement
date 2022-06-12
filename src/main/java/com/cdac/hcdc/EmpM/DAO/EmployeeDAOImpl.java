@@ -53,11 +53,18 @@ public class EmployeeDAOImpl implements EmployeeDao{
 	@Override
 	public void updateEmployee(Employee ebyId) {
 		
-		Object[] sqlParameters={ebyId.getName() , ebyId.getMobile() , ebyId.getCountry()};
-		String sql="UPDATE  employees set name = ? , mobile = ? , country = ?";
+		Object[] sqlParameters={ebyId.getName() , ebyId.getMobile() , ebyId.getCountry() , ebyId.getId()};
+		String sql="UPDATE  employees set name = ? , mobile = ? , country = ? where id=? ";
 		jdbcTemplate.update(sql, sqlParameters);
 		
 		System.out.println("1 Record Updated...");
+	}
+
+	@Override
+	public void deleteEmployee(Integer eId) {
+		String sql="Delete from employees where id=?";
+		jdbcTemplate.update(sql,  eId);
+		System.out.println("1 Record Deleted...");
 	}
 	
 	

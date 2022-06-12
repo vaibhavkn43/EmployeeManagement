@@ -16,8 +16,9 @@
 
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<spring.version>5.2.11.RELEASE</spring.version>
 		<mysql.version>8.0.28</mysql.version>
+		<spring.version>5.2.1.RELEASE</spring.version>
+    <spring.security>5.2.1.RELEASE</spring.security>
 	</properties>
 
 	<dependencies>
@@ -59,6 +60,20 @@
 			<version>4.0.1</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-web</artifactId>
+    <version>${spring.security}</version>
+</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-config</artifactId>
+    <version>${spring.security}</version>
+</dependency>
+		
 
 
 	</dependencies>
